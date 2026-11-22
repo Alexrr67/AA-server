@@ -77,6 +77,11 @@ ParseResult parse_request(const std::string &raw, HttpRequest &req) {
     }
   }
 
+  if (req.version.rfind("HTTP/1.", 0) != 0) {
+    result.status = ParseStatus::BadRequestLine;
+    return result;
+  }
+
   while (std::getline(in, line)) {
     if (!line.empty() && line.back() == '\r') {
       line.pop_back();

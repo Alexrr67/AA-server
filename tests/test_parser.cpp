@@ -29,6 +29,9 @@ int main() {
   // 2. Запрос без версии - ошибка.
   expect_status(ParseStatus::BadRequestLine, "GET /health\r\n\r\n");
 
+  // 2b. Неправильная версия - ошибка.
+  expect_status(ParseStatus::BadRequestLine, "GET /health FOO\r\n\r\n");
+
   // 3. Корректный GET /health.
   {
     HttpRequest req;
