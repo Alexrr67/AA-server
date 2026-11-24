@@ -120,7 +120,7 @@ ParseResult parse_request(const std::string &raw, HttpRequest &req) {
   }
 
   const std::size_t body_start = header_end + separator_len;
-  if (raw.size() < body_start + content_length) {
+  if (content_length > raw.size() - body_start) {
     result.status = ParseStatus::NeedMoreData;
     return result;
   }
