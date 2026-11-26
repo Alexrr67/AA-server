@@ -86,10 +86,9 @@ int main() {
   }
 
   // 9. Огромный Content-Length не должен переполнять проверку.
-  expect_status(
-      ParseStatus::NeedMoreData,
-      "POST / items HTTP / 1.1\r\nContent - Length : 18446744073709551615"
-      "\r\n\r\nhello");
+  expect_status(ParseStatus::NeedMoreData,
+                "POST /items HTTP/1.1\r\nContent-Length: 18446744073709551615"
+                "\r\n\r\nhello");
   std::cout << "all parser tests passed\n";
   return 0;
 }
